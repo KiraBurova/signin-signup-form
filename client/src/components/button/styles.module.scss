@@ -1,0 +1,19 @@
+.button {
+    padding: 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--accent);
+    color: var(--white);
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+
+    &:hover {
+        background-color: #0f528d;
+    }
+
+    &:disabled {
+        background-color: var(--disabled);
+        color: var(--black);
+        cursor: initial;
+    }
+}

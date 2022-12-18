@@ -1,0 +1,26 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+
+  --accent: #1a8ef4;
+  --white: #f2f6fb;
+  --black: #000000;
+  --error: #F44040;
+  --disabled: #e1e7ee;
+
+  --border-radius: 8px;
+}
+
+html, body, #root {
+  margin: 0;
+  height: 100%;
+}
