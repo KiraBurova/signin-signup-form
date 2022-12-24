@@ -14,9 +14,10 @@ type FormValues = {
 };
 
 const SIGN_UP_USER = gql`
-  mutation SignUpUser($data: String!) {
-    signUp(data: $data) {
-      id
+  mutation SignUpUser($user: UserInput!) {
+    signUpUser(user: $user) {
+      email
+      username
     }
   }
 `;
@@ -31,7 +32,7 @@ const SignUp = () => {
   const [signUp, { data, loading, error }] = useMutation(SIGN_UP_USER);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    signUp({ variables: { data } });
+    signUp({ variables: { user: data } });
   };
 
   return (

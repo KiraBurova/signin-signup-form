@@ -31,7 +31,7 @@ const router = createBrowserRouter([
 ]);
 
 const client = new ApolloClient({
-  uri: 'backendserveruri',
+  uri: 'http://localhost:4000',
   cache: new InMemoryCache(),
 });
 
