@@ -61,6 +61,7 @@ const SignUp = () => {
           </div>
           <Input
             placeholder="Password"
+            type="password"
             {...register('password', { required: true })}
           />
           <div className={styles.error}>
@@ -68,6 +69,7 @@ const SignUp = () => {
           </div>
           <Input
             placeholder="Repeat password"
+            type="password"
             {...register('repeatPassword', {
               required: true,
               validate: () =>

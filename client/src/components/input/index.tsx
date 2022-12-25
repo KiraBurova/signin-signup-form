@@ -5,11 +5,17 @@ import styles from './styles.module.scss';
 
 type Props = {
   placeholder: string;
+  type: string;
 };
 
 const Input = React.forwardRef(
   (
-    { placeholder, name, onChange }: Props & ReturnType<UseFormRegister<{}>>,
+    {
+      placeholder,
+      type = 'text',
+      name,
+      onChange,
+    }: Props & ReturnType<UseFormRegister<{}>>,
     ref: React.ForwardedRef<HTMLInputElement>
   ) => {
     return (
@@ -17,6 +23,7 @@ const Input = React.forwardRef(
         className={styles.input}
         ref={ref}
         name={name}
+        type={type}
         onChange={onChange}
         placeholder={placeholder}
       />

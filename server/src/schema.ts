@@ -35,6 +35,7 @@ const typeDefs = `#graphql
 
   type Mutation {
     signUpUser(user: UserInput!): User!
+    signInUser(user: UserInput!): User!
   }
 `;
 
