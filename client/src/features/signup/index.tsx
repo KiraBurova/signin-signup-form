@@ -14,7 +14,7 @@ type FormValues = {
 };
 
 const SIGN_UP_USER = gql`
-  mutation SignUpUser($user: UserInput!) {
+  mutation SignUpUser($user: SignUpUserInput!) {
     signUpUser(user: $user) {
       email
       username
@@ -54,6 +54,7 @@ const SignUp = () => {
           </div>
           <Input
             placeholder="Email"
+            type="email"
             {...register('email', { required: true })}
           />
           <div className={styles.error}>

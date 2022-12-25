@@ -4,11 +4,6 @@ import { Resolvers } from './__generated__/resolvers-types';
 import UserModel from './schemas/user';
 
 const resolvers: Resolvers = {
-  Query: {
-    users: () => {
-      return [{ email: '', username: '' }];
-    },
-  },
   Mutation: {
     signUpUser: async (_, { user }) => {
       const { email, username, password } = user;
@@ -19,7 +14,7 @@ const resolvers: Resolvers = {
       */
       const foundUser = await UserModel.find({ email, username });
 
-      if (foundUser) {
+      if (foundUser.length > 0) {
         throw new GraphQLError('User already exists.', {
           extensions: {
             code: 'BAD_USER_INPUT',
@@ -41,6 +36,27 @@ const resolvers: Resolvers = {
       }
 
       return { email, username };
+    },
+    signInUser: async (_, { user }) => {
+      /**
+       * find user by username
+       * check that password are matching
+       * if yes -> success
+       */
+      const { username, password } = user;
+      const foundUser = await UserModel.find({ username });
+
+      if (foundUser.length > 0) {
+        const match = await bcrypt.compare(password, user.password);
+
+        if (match) {
+          return { status: 'Signed in successfully!' };
+        } else {
+          return { status: 'Password does not match.' };
+        }
+      } else {
+        return { status: 'No user with this name.' };
+      }
     },
   },
 };

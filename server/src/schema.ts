@@ -22,20 +22,29 @@ const typeDefs = `#graphql
     username: String!
   }
 
-  input UserInput {
-    email: String!
+  input SignUpUserInput {
     username: String!
     password: String!
+    email: String!
     repeatPassword: String!
+  }
+
+  input SignInUserInput {
+    username: String!
+    password: String!
   }
 
   type Query {
     users: [User]
   }
 
+  type Status {
+    status: String!
+  }
+
   type Mutation {
-    signUpUser(user: UserInput!): User!
-    signInUser(user: UserInput!): User!
+    signUpUser(user: SignUpUserInput!): User!
+    signInUser(user: SignInUserInput!): Status!
   }
 `;
 

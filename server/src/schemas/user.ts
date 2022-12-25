@@ -1,12 +1,12 @@
 import * as mongoose from 'mongoose';
-import { UserInput } from '../__generated__/resolvers-types';
+import { SignUpUserInput } from '../__generated__/resolvers-types';
 
-const UserSchema = new mongoose.Schema<UserInput>({
+const UserSchema = new mongoose.Schema<SignUpUserInput>({
   email: String,
   username: String,
   password: String,
 });
 
-const UserModel = mongoose.model<UserInput>('User', UserSchema);
+const UserModel = mongoose.model<SignUpUserInput>('User', UserSchema);
 
 export default UserModel;

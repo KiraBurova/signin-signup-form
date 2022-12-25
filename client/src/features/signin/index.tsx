@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import Button from '../../components/button';
 import Input from '../../components/input';
 import Link from '../../components/link';
@@ -7,14 +8,14 @@ import Link from '../../components/link';
 import styles from './styles.module.scss';
 
 type FormValues = {
-  email: string;
+  username: string;
   password: string;
 };
 
 const SIGN_IN_USER = gql`
-  mutation SignInUser($data: String!) {
-    signIn(data: $data) {
-      id
+  mutation SignInUser($user: SignInUserInput!) {
+    signInUser(user: $user) {
+      status
     }
   }
 `;
@@ -28,7 +29,9 @@ const SignIn = () => {
   const [signIn, { data, loading, error }] = useMutation(SIGN_IN_USER);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    signIn({ variables: { data } });
+    signIn({ variables: { user: data } }).then((response) => {
+      toast(response.data.signInUser.status, { type: 'error' });
+    });
   };
 
   return (
@@ -42,11 +45,11 @@ const SignIn = () => {
       <form className={styles.signinForm} onSubmit={handleSubmit(onSubmit)}>
         <>
           <Input
-            placeholder="Email"
-            {...register('email', { required: true })}
+            placeholder="Username"
+            {...register('username', { required: true })}
           />
           <div className={styles.error}>
-            {errors.email && 'Email is required'}
+            {errors.username && 'Username is required'}
           </div>
           <Input
             placeholder="Password"
