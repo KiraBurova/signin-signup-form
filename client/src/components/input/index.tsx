@@ -6,20 +6,23 @@ import styles from './styles.module.scss';
 type Props = {
   placeholder: string;
   type: string;
+  autocomplete?: boolean;
 };
 
 const Input = React.forwardRef(
   (
     {
       placeholder,
-      type = 'text',
       name,
       onChange,
+      type = 'text',
+      autocomplete = 'off',
     }: Props & ReturnType<UseFormRegister<{}>>,
     ref: React.ForwardedRef<HTMLInputElement>
   ) => {
     return (
       <input
+        autoComplete={autocomplete}
         className={styles.input}
         ref={ref}
         name={name}

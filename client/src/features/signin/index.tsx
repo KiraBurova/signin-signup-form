@@ -39,7 +39,7 @@ const SignIn = () => {
       <div className={styles.formText}>
         <h1>Sign in.</h1>
         <span>
-          Not a member? <Link link="/signup">Sign up</Link>
+          Not a member? <Link link="/">Sign up</Link>
         </span>
       </div>
       <form className={styles.signinForm} onSubmit={handleSubmit(onSubmit)}>

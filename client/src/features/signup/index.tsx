@@ -61,6 +61,7 @@ const SignUp = () => {
             {errors.email && 'Email is required'}
           </div>
           <Input
+            autocomplete="new-password"
             placeholder="Password"
             type="password"
             {...register('password', { required: true })}
@@ -69,6 +70,7 @@ const SignUp = () => {
             {errors.password && 'Password is required'}
           </div>
           <Input
+            autocomplete="new-password"
             placeholder="Repeat password"
             type="password"
             {...register('repeatPassword', {

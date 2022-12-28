@@ -4,13 +4,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import styles from './App.module.scss';
 
-function App() {
+const App = () => {
   return (
     <div className={styles.app}>
       <Outlet />
       <ToastContainer />
     </div>
   );
-}
+};
 
 export default App;
