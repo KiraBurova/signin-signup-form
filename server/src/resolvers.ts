@@ -7,6 +7,7 @@ const resolvers: Resolvers = {
   Mutation: {
     signUpUser: async (_, { user }) => {
       const { email, username, password } = user;
+
       /*
         check that user with this email and username does not exist
         encrypt password
@@ -37,25 +38,33 @@ const resolvers: Resolvers = {
 
       return { email, username };
     },
-    signInUser: async (_, { user }) => {
+    signInUser: async (_, { user }, context) => {
       /**
        * find user by username
        * check that password are matching
        * if yes -> success
        */
       const { username, password } = user;
-      const foundUser = await UserModel.find({ username });
-
-      if (foundUser.length > 0) {
-        const match = await bcrypt.compare(password, user.password);
+      const foundUser = await UserModel.findOne({ username });
+      if (foundUser) {
+        const match = await bcrypt.compare(password, foundUser.password);
 
         if (match) {
-          return { status: 'Signed in successfully!' };
+          if (context.req.session) {
+            context.req.session.userId = foundUser.id;
+
+            return { message: 'Signed in successfully!', status: 'success' };
+          } else {
+            return {
+              message: 'An error occured while trying to sign in',
+              status: 'error',
+            };
+          }
         } else {
-          return { status: 'Password does not match.' };
+          return { message: 'Password does not match.', status: 'error' };
         }
       } else {
-        return { status: 'No user with this name.' };
+        return { message: 'No user with this name.', status: 'error' };
       }
     },
   },

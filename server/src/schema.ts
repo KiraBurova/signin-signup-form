@@ -40,6 +40,7 @@ const typeDefs = `#graphql
 
   type Status {
     status: String!
+    message: String!
   }
 
   type Mutation {

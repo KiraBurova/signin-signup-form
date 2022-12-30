@@ -49,6 +49,7 @@ export type SignUpUserInput = {
 
 export type Status = {
   __typename?: 'Status';
+  message: Scalars['String'];
   status: Scalars['String'];
 };
 
@@ -160,6 +161,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 }>;
 
 export type StatusResolvers<ContextType = any, ParentType extends ResolversParentTypes['Status'] = ResolversParentTypes['Status']> = ResolversObject<{
+  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   status?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

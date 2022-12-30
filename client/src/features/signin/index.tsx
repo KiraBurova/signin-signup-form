@@ -30,7 +30,9 @@ const SignIn = () => {
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     signIn({ variables: { user: data } }).then((response) => {
-      toast(response.data.signInUser.status, { type: 'error' });
+      toast(response.data.signInUser.message, {
+        type: response.data.signInUser.status === 'error' ? 'error' : 'success',
+      });
     });
   };
 
