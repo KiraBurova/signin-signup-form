@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { gql, useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/button';
 import Input from '../../components/input';
 
@@ -23,17 +24,23 @@ const SIGN_UP_USER = gql`
 `;
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
     getValues,
     formState: { errors },
   } = useForm<FormValues>();
-  const [signUp, { data, loading, error }] = useMutation(SIGN_UP_USER);
+  const [signUp, { loading, error }] = useMutation(SIGN_UP_USER);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     signUp({ variables: { user: data } });
+    navigate('/home');
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.signup}>

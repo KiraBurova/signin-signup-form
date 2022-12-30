@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Button from '../../components/button';
 import Input from '../../components/input';
@@ -16,23 +17,26 @@ const SIGN_IN_USER = gql`
   mutation SignInUser($user: SignInUserInput!) {
     signInUser(user: $user) {
       status
+      message
     }
   }
 `;
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<FormValues>();
-  const [signIn, { data, loading, error }] = useMutation(SIGN_IN_USER);
+  const [signIn, { error }] = useMutation(SIGN_IN_USER);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     signIn({ variables: { user: data } }).then((response) => {
       toast(response.data.signInUser.message, {
         type: response.data.signInUser.status === 'error' ? 'error' : 'success',
       });
+      navigate('/home');
     });
   };
 
@@ -54,12 +58,14 @@ const SignIn = () => {
             {errors.username && 'Username is required'}
           </div>
           <Input
+            type="password"
             placeholder="Password"
             {...register('password', { required: true })}
           />
           <div className={styles.error}>
             {errors.password && 'Password is required'}
           </div>
+          <div className={styles.error}>{error && error.message}</div>
           <Button disabled={errors && Object.keys(errors).length > 0}>
             Sign in
           </Button>

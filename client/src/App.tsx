@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <Outlet />
-      <ToastContainer />
+      <ToastContainer autoClose={500} />
     </div>
   );
 };
