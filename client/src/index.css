@@ -24,3 +24,10 @@ html, body, #root {
   margin: 0;
   height: 100%;
 }
+.notFound {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  height: 100%;
+}

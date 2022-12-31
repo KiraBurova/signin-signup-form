@@ -4,7 +4,6 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  gql,
 } from '@apollo/client';
 
 import App from './App';
@@ -18,6 +17,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <div className="notFound">404 NOT FOUND :(</div>,
     children: [
       {
         element: <SignUp />,
