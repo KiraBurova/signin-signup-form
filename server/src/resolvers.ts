@@ -38,7 +38,7 @@ const resolvers: Resolvers = {
 
       return { email, username };
     },
-    signInUser: async (_, { user }, context) => {
+    signInUser: async (_, { user }) => {
       /**
        * find user by username
        * check that password are matching
@@ -50,20 +50,13 @@ const resolvers: Resolvers = {
         const match = await bcrypt.compare(password, foundUser.password);
 
         if (match) {
-          if (context.req.session) {
-            context.req.session.userId = foundUser.id;
-
-            return { message: 'Signed in successfully!', status: 'success' };
-          } else {
-            return {
-              message: 'An error occured while trying to sign in',
-              status: 'error',
-            };
-          }
-        } else {
+          return { message: 'Signed in successfully!', status: 'success' };
+        } 
+        else {
           return { message: 'Password does not match.', status: 'error' };
         }
-      } else {
+      }
+       else {
         return { message: 'No user with this name.', status: 'error' };
       }
     },
