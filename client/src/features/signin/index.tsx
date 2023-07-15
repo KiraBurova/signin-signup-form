@@ -1,6 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../../components/button";
 import Input from "../../components/input";
@@ -23,20 +22,18 @@ const SIGN_IN_USER = gql`
 `;
 
 const SignIn = () => {
-  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<FormValues>();
-  const [signIn, { error }] = useMutation(SIGN_IN_USER);
+  const [signIn, { loading, error }] = useMutation(SIGN_IN_USER);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     signIn({ variables: { user: data } }).then((response) => {
       toast(response.data.signInUser.message, {
         type: response.data.signInUser.status === "error" ? "error" : "success",
       });
-      navigate("/home");
     });
   };
 
@@ -70,6 +67,7 @@ const SignIn = () => {
             <Button disabled={errors && Object.keys(errors).length > 0}>
               Sign in
             </Button>
+            {loading && <div>Loading...</div>}
           </>
         </form>
       </div>

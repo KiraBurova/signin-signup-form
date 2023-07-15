@@ -1,6 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { gql, useMutation } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
 import Button from "../../components/button";
 import Input from "../../components/input";
 
@@ -24,7 +23,6 @@ const SIGN_UP_USER = gql`
 `;
 
 const SignUp = () => {
-  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
@@ -35,12 +33,7 @@ const SignUp = () => {
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     signUp({ variables: { user: data } });
-    navigate("/home");
   };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className={styles.signup}>
@@ -97,6 +90,7 @@ const SignUp = () => {
             >
               Sign up
             </Button>
+            {loading && <div>Loading...</div>}
           </>
         </form>
       </div>
