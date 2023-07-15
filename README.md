@@ -1,7 +1,7 @@
 To run client:
 
-cd client -> npm run dev
+`cd client -> npm run dev`
 
 To run server:
 
-cd server -> npm run dev
+`cd server -> npm run dev`
