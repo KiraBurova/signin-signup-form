@@ -1,21 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-} from '@apollo/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-import App from './App';
-import './index.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import SignUp from './features/signup';
-import SignIn from './features/signin';
-import Home from './pages/home';
+import App from "./App";
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import SignUp from "./features/signup";
+import SignIn from "./features/signin";
+import Home from "./pages/home";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     errorElement: <div className="notFound">404 NOT FOUND :(</div>,
     children: [
@@ -24,11 +20,11 @@ const router = createBrowserRouter([
         index: true,
       },
       {
-        path: 'signin',
+        path: "signin",
         element: <SignIn />,
       },
       {
-        path: 'home',
+        path: "home",
         element: <Home />,
       },
     ],
@@ -36,11 +32,11 @@ const router = createBrowserRouter([
 ]);
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  uri: "http://localhost:4000",
   cache: new InMemoryCache(),
 });
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <RouterProvider router={router} />
