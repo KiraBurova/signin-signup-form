@@ -5,6 +5,7 @@ import Input from "../../components/input";
 
 import styles from "./styles.module.scss";
 import Link from "../../components/link";
+import { useNavigate } from "react-router-dom";
 
 type FormValues = {
   username: string;
@@ -23,6 +24,7 @@ const SIGN_UP_USER = gql`
 `;
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
@@ -32,7 +34,7 @@ const SignUp = () => {
   const [signUp, { loading, error }] = useMutation(SIGN_UP_USER);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    signUp({ variables: { user: data } });
+    signUp({ variables: { user: data } }).then(() => navigate("/signin"));
   };
 
   return (

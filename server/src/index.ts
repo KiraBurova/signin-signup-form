@@ -10,15 +10,9 @@ import bodyParser from 'body-parser';
 
 const express = require('express'),
   app = express(),
-  session = require('express-session'),
-  RedisStore = require('connect-redis')(session);
+  session = require('express-session');
 
 require('dotenv').config();
-
-const host = '127.0.0.1';
-
-const { createClient } = require('redis');
-let redisClient = createClient({ legacyMode: true });
 
 async function main() {
   const httpServer = http.createServer(app);
@@ -31,25 +25,10 @@ async function main() {
 
   await server.start();
 
-  await redisClient.connect();
 
   app.use(
     bodyParser.json(),
     cors<cors.CorsRequest>(),
-    session({
-      store: new RedisStore({
-        host: host,
-        port: 6379,
-        client: redisClient,
-      }),
-      secret: process.env.SECRET,
-      resave: false,
-      saveUninitialized: false,
-      cookie: {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-      },
-    }),
     expressMiddleware(server, {
       context: async ({ req, res }) => {
         return { req, res };
