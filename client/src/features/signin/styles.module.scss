@@ -1,7 +1,18 @@
 .signin {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    box-shadow: var(--box-shadow);
+}
+
+.signinInner {
+    flex: 1;
+    padding: 3em 0;
+}
+
+.image {
+    width: 50%;
+    height: 100%;
+    background: url('../../assets/bg.jpg') no-repeat 0 0;
+    background-size: cover;
 }
 
 .signinForm {
@@ -20,5 +31,5 @@
 
 .formText {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 3em;
 }

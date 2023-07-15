@@ -1,6 +1,8 @@
 .input {
-    padding: 0.8rem;
+    padding: 0.8em;
     background-color: var(--white);
     border: none;
-    border: var(--border-radius);
+    border-radius: var(--border-radius);
+    font-size: 0.8rem;
+    font-family: 'Open Sans', sans-serif;
 }

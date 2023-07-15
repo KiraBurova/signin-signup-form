@@ -1,11 +1,12 @@
 .button {
-    padding: 1rem;
+    padding: 1em;
     border: none;
     border-radius: var(--border-radius);
     background-color: var(--accent);
     color: var(--white);
     cursor: pointer;
     transition: background-color .3s ease-in-out;
+    text-transform: uppercase;
 
     &:hover {
         background-color: #0f528d;

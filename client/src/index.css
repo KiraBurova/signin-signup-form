@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -18,12 +18,18 @@
   --disabled: #e1e7ee;
 
   --border-radius: 8px;
+  --box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 html, body, #root {
   margin: 0;
   height: 100%;
 }
+
+.body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .notFound {
   display: flex;
   align-items: center;
